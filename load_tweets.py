@@ -292,8 +292,6 @@ def insert_tweet(connection,tweet):
             mentions = tweet['entities']['user_mentions']
         
         for mention in mentions:
-            id_users = mention['id']
-
             # Insert into users table (unhydrated) if not already present
             # Use the ON CONFLICT DO NOTHING syntax to avoid conflicts
             sql = sqlalchemy.sql.text('''
@@ -302,7 +300,7 @@ def insert_tweet(connection,tweet):
                 ON CONFLICT DO NOTHING
             ''')
 
-            res=connection.execute(sql, mention['id'])
+            res=connection.execute(sql,{'id_users': mention['id']})
 
             # Insert into tweet_mentions
             sql = sqlalchemy.sql.text('''
