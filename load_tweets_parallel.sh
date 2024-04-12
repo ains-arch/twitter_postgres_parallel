@@ -15,4 +15,4 @@ echo "$files" | time parallel python3 load_tweets.py --db=postgresql://postgres:
 echo '================================================================================'
 echo 'load pg_normalized_batch'
 echo '================================================================================'
-# time echo "$files" | parallel python3 -u load_tweets_batch.py --db=postgresql://postgres:pass@localhost:1457/ --inputs $file
+echo "$files" | time parallel python3 -u load_tweets_batch.py --db=postgresql://postgres:pass@localhost:1457/ --inputs $file
